@@ -1,10 +1,6 @@
 package com.tunix.handmadecore.dto
 
-import lombok.Value
-
-@Value
-open class PostDto {
-    var id: Int? = null
+class CreatePostDto {
     var title: String? = null
     var description: String? = null
 }

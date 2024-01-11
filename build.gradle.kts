@@ -24,6 +24,9 @@ configurations {
     }
 }
 
+extra["mapstruct.version"] = "1.5.5.Final"
+extra["swagger.version"] = "2.3.0"
+
 repositories {
     mavenCentral()
 }
@@ -33,8 +36,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.mapstruct:mapstruct:1.5.5.Final")
-    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${project.extra["swagger.version"]}")
+    implementation("org.mapstruct:mapstruct:${project.extra["mapstruct.version"]}")
+    kapt("org.mapstruct:mapstruct-processor:${project.extra["mapstruct.version"]}")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

@@ -1,24 +1,27 @@
 package com.tunix.handmadecore.controller
 
+import com.tunix.handmadecore.dto.CreatePostDto
 import com.tunix.handmadecore.dto.PostDto
 import com.tunix.handmadecore.facade.PostFacade
 import lombok.RequiredArgsConstructor
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/v1/posts")
 @RequiredArgsConstructor
 class PostController(private val postFacade: PostFacade) {
     @GetMapping
-    fun getPostsDto(): List<PostDto> {
-        return postFacade.getPostDtos()
-    }
+    fun getPosts(): List<PostDto> = postFacade.getPostDtos()
+
+    @GetMapping("/{id}")
+    fun getPostById(@PathVariable id: Int): PostDto = postFacade.getPostById(id)
 
     @PostMapping
-    fun createPost(): PostDto {
-        return postFacade.createPost();
-    }
+    fun createPost(@RequestBody createPostDto: CreatePostDto): PostDto = postFacade.createPost(createPostDto)
+
+    @PutMapping
+    fun updatePost(@RequestBody postDto: PostDto): PostDto = postFacade.updatePost(postDto)
+
+    @DeleteMapping
+    fun deletePost(id: Int) = postFacade.deletePost(id)
 }
